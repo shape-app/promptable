@@ -1,7 +1,7 @@
 import {
   Box,
-  Grid,
-  GridItem,
+  ButtonGroup,
+  Flex,
   Popover,
   PopoverArrow,
   PopoverBody,
@@ -9,7 +9,8 @@ import {
   PopoverTrigger,
   useClipboard,
 } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import Button from '../common/Button'
 
 export const TableGrid = ({
   items,
@@ -18,16 +19,85 @@ export const TableGrid = ({
   items: Prompt[]
   renderItem: (item: Prompt) => React.ReactNode
 }) => {
+  const parentRef = useRef<HTMLDivElement>(null)
+  const buttonGroupRef = useRef<HTMLDivElement>(null)
+  const [currentPage, setCurrentPage] = useState(0)
+  const [numberOfItemsPerPage, setNumberOfItemsPerPage] =
+    useState(1)
+
+  useEffect(() => {
+    if (!parentRef.current) {
+      return
+    }
+    let observer = new ResizeObserver(() => {
+      if (!parentRef.current) {
+        return
+      }
+      const firstChild = parentRef.current.children[0]
+      const parentHeight = parentRef.current.clientHeight
+      const buttonGroupHeight =
+        buttonGroupRef.current?.clientHeight ?? 0
+      const childHeight = firstChild.clientHeight
+      const numberOfItemsPerPage = Math.floor(
+        (parentHeight - buttonGroupHeight) / childHeight
+      )
+      setNumberOfItemsPerPage(numberOfItemsPerPage)
+    })
+    observer.observe(parentRef.current)
+    return () => observer.disconnect()
+  }, [parentRef.current])
+
+  const numberOfPages = Math.ceil(
+    items.length / numberOfItemsPerPage
+  )
+  const startingIndex = currentPage * numberOfItemsPerPage
+  const endingIndex = startingIndex + numberOfItemsPerPage
+
   return (
-    <Grid
-      templateRows={`repeat(${items.length}, min-content)`}
-    >
-      {items.map(item => (
-        <GridItem w='100%' key={item.id}>
-          {renderItem(item)}
-        </GridItem>
-      ))}
-    </Grid>
+    <Flex h='full' direction='column'>
+      <Flex
+        flex='1 0 auto'
+        ref={parentRef}
+        minH={0}
+        overflow='auto'
+        direction='column'
+      >
+        {items
+          .slice(startingIndex, endingIndex)
+          .map(item => (
+            <Box w='100%' key={item.id}>
+              {renderItem(item)}
+            </Box>
+          ))}
+      </Flex>
+      <Flex
+        flex='0 1 auto'
+        direction={'row'}
+        justifyContent={'end'}
+      >
+        <ButtonGroup
+          alignItems='center'
+          ref={buttonGroupRef}
+          gap={5}
+        >
+          <Button
+            disabled={currentPage === 0}
+            onClick={() => setCurrentPage(v => v - 1)}
+          >
+            {'<'}
+          </Button>
+          <Box>
+            {currentPage + 1} / {numberOfPages}
+          </Box>
+          <Button
+            disabled={currentPage === numberOfPages - 1}
+            onClick={() => setCurrentPage(v => v + 1)}
+          >
+            {'>'}
+          </Button>
+        </ButtonGroup>
+      </Flex>
+    </Flex>
   )
 }
 
@@ -60,7 +130,7 @@ export const PromptItem = ({
       <Popover placement='bottom' isOpen={showPopover}>
         <PopoverTrigger>
           <div
-            className='flex-1'
+            className='flex-1 truncate'
             onClick={() => {
               onCopy()
               delayedClosePopover()

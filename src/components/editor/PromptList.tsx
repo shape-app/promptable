@@ -73,7 +73,7 @@ const PromptTable = ({
 
   return (
     <>
-      <div className='mr-20 mb-3 pr-12 pl-8'>
+      <div className='flex flex-col pr-20 mb-3 pl-8 h-full box-border'>
         {dialogueState.state === 'update' ? (
           <PromptEditorDialogue
             activePrompt={dialogueState.options.prompt}
@@ -119,35 +119,39 @@ const PromptTable = ({
           }}
           header='Add Prompt'
         />
-        <ToolbarItem
-          icon='pi pi-plus'
-          text='Add a new prompt'
-          handleItemClick={() =>
-            setDialogueState({
-              state: 'create',
-            })
-          }
-        />
-        <TableGrid
-          items={promptsInPromptList}
-          renderItem={prompt => (
-            <PromptItem
-              onEditClick={() =>
-                setDialogueState({
-                  state: 'update',
-                  options: { prompt },
-                })
-              }
-              onDeleteClick={() =>
-                setDialogueState({
-                  state: 'delete',
-                  options: { prompt },
-                })
-              }
-              text={prompt.text}
-            ></PromptItem>
-          )}
-        ></TableGrid>
+        <div className='flex-initial'>
+          <ToolbarItem
+            icon='pi pi-plus'
+            text='Add a new prompt'
+            handleItemClick={() =>
+              setDialogueState({
+                state: 'create',
+              })
+            }
+          />
+        </div>
+        <div className='flex-auto min-w-0'>
+          <TableGrid
+            items={promptsInPromptList}
+            renderItem={prompt => (
+              <PromptItem
+                onEditClick={() =>
+                  setDialogueState({
+                    state: 'update',
+                    options: { prompt },
+                  })
+                }
+                onDeleteClick={() =>
+                  setDialogueState({
+                    state: 'delete',
+                    options: { prompt },
+                  })
+                }
+                text={prompt.text}
+              ></PromptItem>
+            )}
+          ></TableGrid>
+        </div>
       </div>
     </>
   )

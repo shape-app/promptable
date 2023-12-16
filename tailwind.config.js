@@ -43,7 +43,7 @@ module.exports = {
         workspace: '88vh',
         '70vh': '70vh',
         '75vh': '75vh',
-        rest: 'calc(100vh - 3rem - 2.5rem - 5rem)',
+        rest: 'calc(100vh - 3rem - 5rem)',
       },
       minHeight: {
         '15vh': '15vh',
