@@ -34,6 +34,9 @@ export const TableGrid = ({
         return
       }
       const firstChild = parentRef.current.children[0]
+      if (!firstChild) {
+        return
+      }
       const parentHeight = parentRef.current.clientHeight
       const buttonGroupHeight =
         buttonGroupRef.current?.clientHeight ?? 0
@@ -42,10 +45,17 @@ export const TableGrid = ({
         (parentHeight - buttonGroupHeight) / childHeight
       )
       setNumberOfItemsPerPage(numberOfItemsPerPage)
+
+      const maxNumberOfPages = Math.ceil(
+        items.length / numberOfItemsPerPage
+      )
+      if (maxNumberOfPages - 1 <= currentPage) {
+        setCurrentPage(maxNumberOfPages - 1)
+      }
     })
     observer.observe(parentRef.current)
     return () => observer.disconnect()
-  }, [parentRef.current])
+  }, [items])
 
   const numberOfPages = Math.ceil(
     items.length / numberOfItemsPerPage
