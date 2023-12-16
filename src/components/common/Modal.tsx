@@ -15,11 +15,13 @@ export const CommonModal = ({
   header,
   footer,
   children,
+  fixedHeight,
 }: {
   open: boolean
   closeModal: () => void
   header?: React.ReactNode
   footer?: React.ReactNode
+  fixedHeight?: string
   children: React.ReactNode
 }) => {
   const [topOffset, setTopOffset] = useState('-100%')
@@ -31,7 +33,7 @@ export const CommonModal = ({
       const componentProportion =
         (height / documentHeight) * 100
       setTopOffset(
-        `${Math.floor((70 - componentProportion) / 2)}%`
+        `${Math.floor((80 - componentProportion) / 2)}%`
       )
     },
     []
@@ -63,14 +65,14 @@ export const CommonModal = ({
       <ModalContent
         ref={onRefAttached}
         top={topOffset}
-        className='border-3 mt-1/4 sm:text-sm md:text-md lg:text-lg 
-        xl:text-xl 2xl:text-2xl'
+        className='border-3 mt-1/4 sm:text-sm md:text-md lg:text-lg xl:text-xl 2xl:text-2xl'
         borderColor='blackAlpha.800'
-        maxHeight='75vh'
+        maxHeight={fixedHeight ? '' : '75vh'}
+        height={fixedHeight ? fixedHeight : ''}
       >
         {!!header && <ModalHeader>{header}</ModalHeader>}
         <ModalCloseButton />
-        <ModalBody>{children}</ModalBody>
+        <ModalBody maxHeight={'100%'}>{children}</ModalBody>
         {!!footer && <ModalFooter>{footer}</ModalFooter>}
       </ModalContent>
     </ChakraModal>
