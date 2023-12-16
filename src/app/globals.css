@@ -20,3 +20,7 @@ body {
   color: rgb(var(--foreground-rgb));
   --highlight-text-color: grey !important;
 }
+
+i {
+  font-size: 18px;
+}

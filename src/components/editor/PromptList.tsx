@@ -144,7 +144,6 @@ const PromptTable = ({
                   options: { prompt },
                 })
               }
-              gap={4}
               text={prompt.text}
             ></PromptItem>
           )}
