@@ -33,13 +33,11 @@ export const TableGrid = ({
 
 export const PromptItem = ({
   text,
-  gap = 3,
   onDeleteClick,
   onEditClick,
   onMouseEnter,
 }: {
   text: string
-  gap?: 2 | 3 | 4 | 6 | 8
   onEditClick?: () => void
   onDeleteClick?: () => void
   onMouseEnter?: (
@@ -90,7 +88,7 @@ export const PromptItem = ({
       </Popover>
       <div
         onMouseEnter={onMouseEnter}
-        className={`flex gap-${gap} ml-4`}
+        className={`flex gap-4 ml-4`}
       >
         <i
           onClick={onEditClick}
