@@ -1,7 +1,7 @@
 import { ViewProtection } from '@/components/ViewProtection'
 import Link from 'next/link'
 
-const Intro = () => (
+const WelcomePage = () => (
   <div className='max-w-2xl mx-auto p-4 text-gray-800'>
     <div className='text-3xl font-bold mb-4'>
       Welcome to Promptable!
@@ -64,7 +64,7 @@ const Page = () => {
   return (
     <>
       <ViewProtection>
-        <Intro />
+        <WelcomePage />
       </ViewProtection>
     </>
   )
