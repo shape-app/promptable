@@ -6,13 +6,14 @@ import {
   usePromptDeletion,
   usePromptUpdate,
 } from '@/hooks/prompt'
-import { PromptItem, TableGrid } from './PromptTable'
+import { PromptItem } from './Prompt'
 import { AutosizeTextarea } from '../common/TextInput'
 import { CommonModal } from '../common/Modal'
 import { ToolbarItem } from '@/components/editor/LeftNaviBarForEditor'
 
 import Button from '../common/Button'
 import { ButtonGroup } from '@chakra-ui/react'
+import Paginator from '../common/Paginator'
 
 const PromptList = ({
   promptList,
@@ -131,8 +132,9 @@ const PromptTable = ({
           />
         </div>
         <div className='flex-auto min-w-0'>
-          <TableGrid
+          <Paginator
             items={promptsInPromptList}
+            getItemKey={prompt => prompt.id}
             renderItem={prompt => (
               <PromptItem
                 onEditClick={() =>
@@ -150,7 +152,7 @@ const PromptTable = ({
                 text={prompt.text}
               ></PromptItem>
             )}
-          ></TableGrid>
+          ></Paginator>
         </div>
       </div>
     </>
