@@ -13,7 +13,7 @@ import { ToolbarItem } from '@/components/editor/LeftNaviBarForEditor'
 
 import Button from '../common/Button'
 import { ButtonGroup } from '@chakra-ui/react'
-import Pagination from '../common/Paginator'
+import Pagination from '../common/Pagination'
 
 const PromptList = ({
   promptList,
