@@ -13,7 +13,7 @@ import { ToolbarItem } from '@/components/editor/LeftNaviBarForEditor'
 
 import Button from '../common/Button'
 import { ButtonGroup } from '@chakra-ui/react'
-import Paginator from '../common/Paginator'
+import Pagination from '../common/Paginator'
 
 const PromptList = ({
   promptList,
@@ -132,7 +132,7 @@ const PromptTable = ({
           />
         </div>
         <div className='flex-auto min-w-0'>
-          <Paginator
+          <Pagination
             items={promptsInPromptList}
             getItemKey={prompt => prompt.id}
             renderItem={prompt => (
@@ -152,7 +152,7 @@ const PromptTable = ({
                 text={prompt.text}
               ></PromptItem>
             )}
-          ></Paginator>
+          ></Pagination>
         </div>
       </div>
     </>

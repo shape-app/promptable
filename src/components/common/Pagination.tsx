@@ -2,7 +2,7 @@ import { Box, ButtonGroup, Flex } from '@chakra-ui/react'
 import { useEffect, useRef, useState } from 'react'
 import Button from './Button'
 
-const Paginator = <T,>({
+const Pagination = <T,>({
   items,
   renderItem,
   getItemKey,
@@ -103,4 +103,4 @@ const Paginator = <T,>({
   )
 }
 
-export default Paginator
+export default Pagination
