@@ -1,7 +1,5 @@
 import {
   Box,
-  Grid,
-  GridItem,
   Popover,
   PopoverArrow,
   PopoverBody,
@@ -10,26 +8,6 @@ import {
   useClipboard,
 } from '@chakra-ui/react'
 import { useState } from 'react'
-
-export const TableGrid = ({
-  items,
-  renderItem,
-}: {
-  items: Prompt[]
-  renderItem: (item: Prompt) => React.ReactNode
-}) => {
-  return (
-    <Grid
-      templateRows={`repeat(${items.length}, min-content)`}
-    >
-      {items.map(item => (
-        <GridItem w='100%' key={item.id}>
-          {renderItem(item)}
-        </GridItem>
-      ))}
-    </Grid>
-  )
-}
 
 export const PromptItem = ({
   text,
@@ -60,7 +38,7 @@ export const PromptItem = ({
       <Popover placement='bottom' isOpen={showPopover}>
         <PopoverTrigger>
           <div
-            className='flex-1'
+            className='flex-1 truncate'
             onClick={() => {
               onCopy()
               delayedClosePopover()
