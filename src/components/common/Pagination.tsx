@@ -89,7 +89,8 @@ const Pagination = <T,>({
             {'<'}
           </Button>
           <Box>
-            {currentPage + 1} / {numberOfPages}
+            {numberOfPages > 0 ? currentPage + 1 : 0} /{' '}
+            {numberOfPages}
           </Box>
           <Button
             disabled={currentPage === numberOfPages - 1}
