@@ -44,17 +44,6 @@ const OptionBar = ({
             className='hover:bg-gray-100 cursor-pointer grid items-center
                       justify-between grid-cols-[1fr_min-content] px-2'
             onClick={() => {
-              setShowDeleteModal(true)
-              setShowOptionBar(false)
-            }}
-            tabIndex={TabIndex.Important}
-          >
-            <li className='flex-grow text-lg'>Delete</li>
-          </div>
-          <div
-            className='hover:bg-gray-100 cursor-pointer grid items-center
-                      justify-between grid-cols-[1fr_min-content] px-2'
-            onClick={() => {
               setShowRenameModal(true)
               setShowOptionBar(false)
             }}
@@ -62,6 +51,17 @@ const OptionBar = ({
           >
             <li className='flex-grow text-lg'>Rename</li>
           </div>
+          <div
+            className='hover:bg-gray-100 cursor-pointer grid items-center
+                      justify-between grid-cols-[1fr_min-content] px-2'
+            onClick={() => {
+              setShowDeleteModal(true)
+              setShowOptionBar(false)
+            }}
+            tabIndex={TabIndex.Important}
+          >
+            <li className='flex-grow text-lg'>Delete</li>
+          </div>{' '}
         </ul>
       </div>
     </div>

@@ -3,11 +3,14 @@ import {
   ModalBody,
   ModalCloseButton,
   ModalContent,
+  ModalContentProps,
   ModalFooter,
   ModalHeader,
   ModalOverlay,
 } from '@chakra-ui/react'
 import { useCallback, useState } from 'react'
+
+type ChakraModalProps = ModalContentProps
 
 export const CommonModal = ({
   open,
@@ -16,6 +19,7 @@ export const CommonModal = ({
   footer,
   children,
   fixedHeight,
+  ...restProps
 }: {
   open: boolean
   closeModal: () => void
@@ -23,7 +27,7 @@ export const CommonModal = ({
   footer?: React.ReactNode
   fixedHeight?: string
   children: React.ReactNode
-}) => {
+} & ModalContentProps) => {
   const [topOffset, setTopOffset] = useState('-100%')
   const adjustModalPosition = useCallback(
     (element: HTMLElement) => {
@@ -56,6 +60,7 @@ export const CommonModal = ({
 
   return (
     <ChakraModal
+      trapFocus={true}
       isOpen={open}
       onClose={closeModal}
       closeOnEsc
@@ -69,6 +74,7 @@ export const CommonModal = ({
         borderColor='blackAlpha.800'
         maxHeight={fixedHeight ? '' : '75vh'}
         height={fixedHeight ? fixedHeight : ''}
+        {...restProps}
       >
         {!!header && <ModalHeader>{header}</ModalHeader>}
         <ModalCloseButton />

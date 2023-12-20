@@ -6,7 +6,9 @@ const Button = ({
   className,
   onClick,
   disabled,
+  allowSubmit = false,
 }: {
+  allowSubmit?: boolean
   children: ReactNode
   className?: string
   onClick?: () => void
@@ -21,6 +23,18 @@ const Button = ({
     fontWeight='normal'
     background='transparent'
     className={`${className}`}
+    onKeyDown={e => {
+      if (
+        allowSubmit &&
+        e.key === 'Enter' &&
+        !disabled &&
+        onClick
+      ) {
+        console.log(e)
+        onClick()
+        e.stopPropagation()
+      }
+    }}
     onClick={disabled ? undefined : onClick}
     color={disabled ? 'blackAlpha.400' : 'blackAlpha.800'}
     cursor={disabled ? 'auto' : 'pointer'}
