@@ -1,5 +1,3 @@
-'use client'
-import { TabIndex } from '@/styles/common'
 import { useEffect, useRef } from 'react'
 
 const OptionBar = ({
@@ -31,6 +29,8 @@ const OptionBar = ({
         'click',
         handleClickOutside
       )
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

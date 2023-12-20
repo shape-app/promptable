@@ -47,6 +47,7 @@ const Pagination = <T,>({
     })
     observer.observe(parentRef.current)
     return () => observer.disconnect()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items])
 
   const numberOfPages = Math.ceil(
