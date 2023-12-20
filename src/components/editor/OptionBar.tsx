@@ -1,5 +1,3 @@
-'use client'
-import { TabIndex } from '@/styles/common'
 import { useEffect, useRef } from 'react'
 
 const OptionBar = ({
@@ -31,6 +29,8 @@ const OptionBar = ({
         'click',
         handleClickOutside
       )
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
@@ -40,28 +40,26 @@ const OptionBar = ({
     >
       <div onClick={e => e.stopPropagation()}>
         <ul>
-          <div
+          <li
             className='hover:bg-gray-100 cursor-pointer grid items-center
-                      justify-between grid-cols-[1fr_min-content] px-2'
-            onClick={() => {
-              setShowDeleteModal(true)
-              setShowOptionBar(false)
-            }}
-            tabIndex={TabIndex.Important}
-          >
-            <li className='flex-grow text-lg'>Delete</li>
-          </div>
-          <div
-            className='hover:bg-gray-100 cursor-pointer grid items-center
-                      justify-between grid-cols-[1fr_min-content] px-2'
+                      justify-between grid-cols-[1fr_min-content] px-2 flex-grow text-lg'
             onClick={() => {
               setShowRenameModal(true)
               setShowOptionBar(false)
             }}
-            tabIndex={TabIndex.Important}
           >
-            <li className='flex-grow text-lg'>Rename</li>
-          </div>
+            Rename
+          </li>
+          <li
+            className='hover:bg-gray-100 cursor-pointer grid items-center
+                      justify-between grid-cols-[1fr_min-content] px-2 flex-grow text-lg'
+            onClick={() => {
+              setShowDeleteModal(true)
+              setShowOptionBar(false)
+            }}
+          >
+            Delete
+          </li>
         </ul>
       </div>
     </div>

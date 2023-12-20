@@ -4,9 +4,18 @@ import './globals.css'
 import 'primereact/resources/themes/mira/theme.css'
 import 'primereact/resources/primereact.min.css'
 import 'primeicons/primeicons.css'
-import { ChakraProvider } from '@chakra-ui/react'
+import {
+  ChakraProvider,
+  extendTheme,
+} from '@chakra-ui/react'
 import { spectral } from '@/styles/font'
 import MainNavigationBar from '@/components/common/MainNavigationBar'
+
+const theme = extendTheme({
+  shadows: {
+    outline: 'none',
+  },
+})
 
 export default function RootLayout({
   children,
@@ -15,7 +24,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <ChakraProvider>
+      <ChakraProvider theme={theme}>
         <body className={`h-screen ${spectral.className}`}>
           <MainNavigationBar />
           <main

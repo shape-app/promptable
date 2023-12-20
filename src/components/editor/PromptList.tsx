@@ -186,10 +186,7 @@ const PromptEditorDialogue = ({
   const [currentPromptText, setCurrentPromptText] =
     useState(activePrompt?.text || '')
 
-  const onSaveClick = () => {
-    if (!currentPromptText) {
-      return
-    }
+  const savePrompt = () => {
     if (activePrompt !== undefined) {
       onSave({
         ...activePrompt,
@@ -199,6 +196,13 @@ const PromptEditorDialogue = ({
       onSave({ text: currentPromptText })
       setCurrentPromptText('')
     }
+  }
+
+  const onSaveClick = () => {
+    if (!currentPromptText) {
+      return
+    }
+    savePrompt()
     closeDialogue()
   }
 
@@ -213,6 +217,14 @@ const PromptEditorDialogue = ({
           <Button onClick={onSaveClick}>Save</Button>
         </ButtonGroup>
       }
+      onKeyDown={e => {
+        switch (e.key) {
+          case 'Escape':
+            e.stopPropagation()
+            closeDialogue()
+            break
+        }
+      }}
     >
       <AutosizeTextarea
         maxHeight='53vh'
@@ -220,6 +232,10 @@ const PromptEditorDialogue = ({
         onChange={setCurrentPromptText}
         scale={1.1}
         tolerance={10}
+        onSubmit={() => {
+          savePrompt()
+          closeDialogue()
+        }}
       />
     </CommonModal>
   )
@@ -239,6 +255,18 @@ const PromptDeleteDialog = ({
   onConfirm: (value: PromptDelete[]) => Promise<void>
 }) => {
   const closeDialogue = () => setVisible(false)
+  const deletePromptsAndCloseDialogue = () => {
+    if (activePrompts !== undefined) {
+      onConfirm(
+        activePrompts.map(prompt => ({
+          id: prompt.id,
+          parentId: promptList.id,
+        }))
+      )
+      closeDialogue()
+    }
+  }
+
   return (
     <CommonModal
       closeModal={closeDialogue}
@@ -247,34 +275,36 @@ const PromptDeleteDialog = ({
       footer={
         <ButtonGroup>
           <Button onClick={closeDialogue}>Cancel</Button>
-          <Button
-            onClick={async () => {
-              if (activePrompts !== undefined) {
-                await onConfirm(
-                  activePrompts.map(prompt => ({
-                    id: prompt.id,
-                    parentId: promptList.id,
-                  }))
-                )
-                closeDialogue()
-              }
-            }}
-          >
+          <Button onClick={deletePromptsAndCloseDialogue}>
             Confirm
           </Button>
         </ButtonGroup>
       }
+      onKeyDown={e => {
+        switch (e.key) {
+          case 'Escape':
+            e.stopPropagation()
+            closeDialogue()
+            break
+          case 'Enter':
+            e.stopPropagation()
+            deletePromptsAndCloseDialogue()
+            break
+        }
+      }}
     >
-      {activePrompts && activePrompts?.length > 1 ? (
-        <div className='confirmation-content text-base'>
-          <div>{activePrompts.length} prompts</div>
-        </div>
-      ) : null}
-      {activePrompts && activePrompts.length === 1 ? (
-        <div className='confirmation-content text-base'>
-          <div>{activePrompts[0].text}</div>
-        </div>
-      ) : null}
+      <div>
+        {activePrompts && activePrompts?.length > 1 ? (
+          <div className='confirmation-content text-base'>
+            <div>{activePrompts.length} prompts</div>
+          </div>
+        ) : null}
+        {activePrompts && activePrompts.length === 1 ? (
+          <div className='confirmation-content text-base'>
+            <div>{activePrompts[0].text}</div>
+          </div>
+        ) : null}
+      </div>
     </CommonModal>
   )
 }

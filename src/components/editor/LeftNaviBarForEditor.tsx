@@ -184,17 +184,17 @@ export const PromptList = ({
             className='pi pi-ellipsis-h cursor-pointer 
                   hover:bg-gray-100 rounded-md p-2'
             style={{ fontSize: '1.2rem' }}
-          ></i>
-          {showDeleteModal ? (
-            <PromptListDeleteModal
-              setShowDeleteModal={setShowDeleteModal}
-              promptList={promptList}
-              onConfirm={PromptListDelete =>
-                deletePromptLists(PromptListDelete)
-              }
-            />
-          ) : null}
+          />
         </div>
+        {showDeleteModal ? (
+          <PromptListDeleteModal
+            setShowDeleteModal={setShowDeleteModal}
+            promptList={promptList}
+            onConfirm={PromptListDelete =>
+              deletePromptLists(PromptListDelete)
+            }
+          />
+        ) : null}
         <Flyout
           x={right}
           y={bottom}
@@ -228,6 +228,19 @@ const PromptListDeleteModal = ({
       open
       closeModal={() => setShowDeleteModal(false)}
       header='Are you sure to delete?'
+      onKeyDown={async e => {
+        switch (e.key) {
+          case 'Enter':
+            e.stopPropagation()
+            await onConfirm([{ id: promptList.id }])
+            closeDialogue()
+            break
+          case 'Escape':
+            closeDialogue()
+            e.stopPropagation()
+            break
+        }
+      }}
       footer={
         <>
           <ButtonGroup>
@@ -302,7 +315,6 @@ const PromptListRenameModal = ({
           </span>
         </div>
       )}
-
       <AutosizeTextarea
         resize='none'
         padding='0px 1px'

@@ -35,7 +35,11 @@ export const PromptItem = ({
      flex items-center cursor-pointer
      hover:bg-gray-100 rounded-sm'
     >
-      <Popover placement='bottom' isOpen={showPopover}>
+      <Popover
+        placement='bottom'
+        isOpen={showPopover}
+        autoFocus={false}
+      >
         <PopoverTrigger>
           <div
             className='flex-1 truncate'

@@ -13,7 +13,6 @@ type OtherProps = Omit<
   TextareaProps,
   | 'onChange'
   | 'onBlur'
-  | 'focusBorderColor'
   | 'value'
   | 'maxBlockSize'
   | 'focusBorderColor'
@@ -100,7 +99,7 @@ const AutosizeTextarea = forwardRef(
           if (onKeyDown) {
             onKeyDown(e)
           }
-          if (e.key == 'Enter' && !e.shiftKey) {
+          if (e.key == 'Enter' && !e.shiftKey && onSubmit) {
             handleRef.current.handled = true
             onSubmit?.()
             e.stopPropagation()
