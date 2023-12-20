@@ -19,6 +19,7 @@ export const ViewProtection = ({
   )
   const hasViewed = Boolean(hasViewedString)
   const router = useRouter()
+  console.log('ViewProtection: rendering')
 
   useEffect(() => {
     if (!hasViewed) {

@@ -186,10 +186,7 @@ const PromptEditorDialogue = ({
   const [currentPromptText, setCurrentPromptText] =
     useState(activePrompt?.text || '')
 
-  const onSaveClick = () => {
-    if (!currentPromptText) {
-      return
-    }
+  const savePrompt = () => {
     if (activePrompt !== undefined) {
       onSave({
         ...activePrompt,
@@ -199,6 +196,13 @@ const PromptEditorDialogue = ({
       onSave({ text: currentPromptText })
       setCurrentPromptText('')
     }
+  }
+
+  const onSaveClick = () => {
+    if (!currentPromptText) {
+      return
+    }
+    savePrompt()
     closeDialogue()
   }
 
@@ -215,6 +219,21 @@ const PromptEditorDialogue = ({
       }
     >
       <AutosizeTextarea
+        onKeyDown={e => {
+          switch (e.key) {
+            case 'Escape':
+              e.stopPropagation()
+              closeDialogue()
+              break
+            case 'Enter':
+              if (!e.shiftKey) {
+                e.stopPropagation()
+                savePrompt()
+                closeDialogue()
+              }
+              break
+          }
+        }}
         maxHeight='53vh'
         value={currentPromptText}
         onChange={setCurrentPromptText}

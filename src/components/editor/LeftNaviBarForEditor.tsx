@@ -302,7 +302,6 @@ const PromptListRenameModal = ({
           </span>
         </div>
       )}
-
       <AutosizeTextarea
         resize='none'
         padding='0px 1px'
