@@ -1,20 +1,29 @@
-export const enum LocalStorageKey {
+import { useEffect, useState } from 'react'
+
+export enum LocalStorageKey {
   hasViewedWelcomePage = 'has_viewed_welcome_page',
 }
 
 export const useLocalStorage = (
   key: LocalStorageKey
 ): [string | null, (value: string) => void] => {
-  // We are running in browser
-  if (typeof window !== 'undefined') {
-    return [
-      localStorage.getItem(key),
-      (value: string) => {
-        localStorage.setItem(key, value)
-      },
-    ]
+  const [value, setValue] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setValue(localStorage.getItem(key))
+    }
+  }, [key])
+
+  if (typeof window === 'undefined') {
+    throw Promise.resolve(value)
   }
 
-  // We are running on server
-  return [null, () => {}]
+  return [
+    value,
+    (value: string) => {
+      setValue(value)
+      localStorage.setItem(key, value)
+    },
+  ]
 }

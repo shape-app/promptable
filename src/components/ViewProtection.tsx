@@ -1,7 +1,5 @@
 'use client'
 
-import { Skeleton, Stack } from '@chakra-ui/react'
-
 import {
   LocalStorageKey,
   useLocalStorage,
@@ -14,33 +12,22 @@ export const ViewProtection = ({
 }: {
   children: JSX.Element
 }) => {
-  const [hasViewedString, setHasViewed] = useLocalStorage(
-    LocalStorageKey.hasViewedWelcomePage
-  )
+  const [hasViewedString, setHasViewedString] =
+    useLocalStorage(LocalStorageKey.hasViewedWelcomePage)
   const hasViewed = Boolean(hasViewedString)
   const router = useRouter()
 
   useEffect(() => {
-    if (!hasViewed) {
-      setHasViewed(false.toString())
+    if (hasViewed === null) {
+      setHasViewedString(true.toString())
+    } else if (hasViewed) {
+      router.replace('/prompts')
     } else {
-      router.replace('/prompts', undefined)
     }
-  })
+  }, [hasViewed, setHasViewedString, router])
 
   if (hasViewedString === null || hasViewed) {
-    return (
-      <div className='flex justify-center'>
-        <Stack width={'3xl'} spacing={10}>
-          <Skeleton height='50px' width={'xl'} />
-          <Skeleton height='30px' />
-          <Skeleton height='30px' />
-          <Skeleton height='30px' />
-          <Skeleton height='30px' />
-          <Skeleton height='30px' />
-        </Stack>
-      </div>
-    )
+    return null
   }
 
   return children
