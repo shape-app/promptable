@@ -21,10 +21,13 @@ Your go-to web app for efficiently managing and harnessing custom prompts, desig
 
    Quickly locate the perfect prompt for your current task.
 
-## **Owner:**
+## Tutorial:
 
-This project is developed and maintained by _Shape_.
+https://youtu.be/qMLLt_XFVdE?si=Vh-q4_HnCd52Mmu-
 
+## Owner:
+
+This project is developed and maintained by Shape.
+
+- Bug report or feedback: [Email](mailto:shapeapp.23@gmail.com)
 - About us: [Notion Page](https://ablaze-empress-f41.notion.site/Shape-bd828c0f62bf4b7d84e79a0cab20cd35?pvs=4)
-- Contact: [Email](mailto:shapeapp.23@gmail.com)
-- @[haleygelato](https://github.com/haleygelato): I came up with this idea because I was tired of scrolling through chat history just to find certain prompts I used before. And after spending time perfecting a prompt, there was no good place to save it. While I tried Google Docs and Notes, the process of highlighting the entire text for copying was just too slow and tedious. This app is designed to address those challenges.
