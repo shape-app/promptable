@@ -15,10 +15,6 @@ export const useLocalStorage = (
     }
   }, [key])
 
-  if (typeof window === 'undefined') {
-    throw Promise.resolve(value)
-  }
-
   return [
     value,
     (value: string) => {

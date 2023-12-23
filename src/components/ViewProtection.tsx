@@ -6,6 +6,7 @@ import {
 } from '@/hooks/useLocalStorage'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
+import LoadingIndicator from './common/Loading'
 
 export const ViewProtection = ({
   children,
@@ -18,16 +19,13 @@ export const ViewProtection = ({
   const router = useRouter()
 
   useEffect(() => {
-    if (hasViewed === null) {
-      setHasViewedString(true.toString())
-    } else if (hasViewed) {
+    if (hasViewed) {
       router.replace('/prompts')
-    } else {
     }
   }, [hasViewed, setHasViewedString, router])
 
   if (hasViewedString === null || hasViewed) {
-    return null
+    return <LoadingIndicator />
   }
 
   return children
