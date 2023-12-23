@@ -24,8 +24,8 @@ const WelcomePage = () => (
     <div className='text-xl font-bold mb-4'>Team</div>
     <div className='mb-10'>
       Promptable is developed and maintained by Shape, a
-      community-driven organization focused on exploring a
-      shared interest in software products. <br />
+      small organization where tech enthusiasts come
+      together to build, learn, and innovate. <br />
       Visit our{' '}
       <a
         className='text-gray-600 font-bold'
@@ -54,8 +54,8 @@ const WelcomePage = () => (
       </Link>
     </div>
     <div className='text-sm'>
-      &copy; Copyright {new Date().getFullYear()}{' '}
-      Promptable. All rights reserved.
+      &copy; Copyright {new Date().getFullYear()} Shape. All
+      rights reserved.
     </div>
   </div>
 )
