@@ -36,7 +36,7 @@ Ensure the following are installed on your device before proceeding:
 
 ### Running the Project
 
-- Framework and Tools: This repository is developed using `Next.js` and `React`, with `IndexedDB` for local persistent data storage, and `Jest` for testing.
+- Framework and Tools: This repo is developed using `Next.js` and `React`, with `IndexedDB` for local persistent data storage, and `Jest` for testing.
 
 - Install Dependencies: Start by installing all required dependencies. Run `yarn install`.
 
@@ -46,7 +46,7 @@ Ensure the following are installed on your device before proceeding:
 
 ### Formatting and linting
 
-Before contributing to this repository, setting up `pre-commit` is required. Follow the installation instructions available at [pre-commit.com](https://pre-commit.com/). In the root directory of this repository, run the following command to install the pre-commit hook:
+Before contributing to this repo, setting up `pre-commit` is required. Follow the installation instructions available at [pre-commit.com](https://pre-commit.com/). In the root directory of this repo, run the following command to install the pre-commit hook:
 
 ```bash
 $ ~/Desktop/promptable pre-commit install
@@ -62,7 +62,7 @@ Once pre-commit is configured, it will automatically run `Prettier` and `ESLint`
 
 ### Workflows
 
-This repository employs GitHub Actions that automatically execute upon opening a new pull request and with every subsequent commit to that pull request. These actions include formatting, linting, building, and, post-merge, deploying your changes. For a successful merge, all actions must pass, and your pull request requires approval. Once merged, the actions rerun on the main branch. Typically, the entire process takes less than 10 minutes for your changes to go live.
+This repo employs GitHub Actions that automatically execute upon opening a new pull request and with every subsequent commit to that pull request. These actions include formatting, linting, building, and, post-merge, deploying your changes. For a successful merge, all actions must pass, and your pull request requires approval. Once merged, the actions rerun on the main branch. Typically, the entire process takes less than 10 minutes for your changes to go live.
 
 ## Owner:
 
