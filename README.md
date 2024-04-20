@@ -69,4 +69,4 @@ This repo employs GitHub Actions that automatically execute upon opening a new p
 This project is developed and maintained by Shape.
 
 - Bug report or feedback: [Email](mailto:shapeapp.23@gmail.com)
-- About us: [Notion Page](https://ablaze-empress-f41.notion.site/Shape-bd828c0f62bf4b7d84e79a0cab20cd35?pvs=4)
+- About us: [Notion Page](https://shape-app.notion.site/Shape-bd828c0f62bf4b7d84e79a0cab20cd35)
